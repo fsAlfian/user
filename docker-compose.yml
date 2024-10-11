@@ -36,6 +36,9 @@ services:
   db:
     image: mysql:8
     environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootpassword
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
     ports:

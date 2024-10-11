@@ -1,14 +1,15 @@
 import { useState } from 'react'
-function App() {
+import Layout from './components/layout'
+export default function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+    <Layout>
       <div>
-        sssszsazzz
+        child
       </div>
+    </Layout>
     </>
   )
 }
-
-export default App
