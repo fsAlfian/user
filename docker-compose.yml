@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/usr/src/app # Sync local files with the container
+      - /usr/src/app/node_modules # Prevent node_modules from being overwritten
+    ports:
+      - "8000:8000"
+    environment:
+      NODE_ENV: development
+    command: npm run dev # Use nodemon for live reloading
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/usr/src/app # Sync local files with the container
+      - /usr/src/app/node_modules # Prevent node_modules from being overwritten
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      WDS_SOCKET_HOST: 127.0.0.1
+      CHOKIDAR_USEPOLLING: true
+      WATCHPACK_POLLING: true
+
+    command: npm run dev # React dev server for live reloading
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3307:3307"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
