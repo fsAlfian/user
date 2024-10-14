@@ -228,7 +228,7 @@ test("identity number is registered", async () => {
   }
 });
 
-beforeEach(async () => {
+afterEach(async () => {
   await User.destroy({ where: {} });
 });
 

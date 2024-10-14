@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@dotenvx/dotenvx": "^1.19.2",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -14,8 +15,8 @@
   "version": "1.0.0",
   "main": "App.js",
   "scripts": {
-    "dev": "NODE_ENV=localhost nodemon app.js -L",
-    "test": "npx jest --runInBand --forceExit --setTimeout=20000  --verbose --coverage"
+    "dev": "dotenvx run --env-file=.env -- nodemon app.js -L",
+    "test": "dotenvx run --env-file=.env.test --  npx jest --runInBand --forceExit --setTimeout=20000  --verbose --coverage"
   },
   "keywords": [],
   "author": "",
