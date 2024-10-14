@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Index from './pages/Index.jsx'
 import Create from './pages/Create.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -11,11 +10,7 @@ const router = createBrowserRouter([
     element: <Layout/>,
     children: [
       {
-        path: '',
-        element: <Index/>
-      },
-      {
-        path: "create",
+        path: "",
         element: <Create/>
       }
     ]

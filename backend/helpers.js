@@ -11,8 +11,6 @@ exports.errorHandler = (err, req, res, next) => {
   if (name === "SequelizeUniqueConstraintError") {
     code = 401;
     status = "error";
-    console.log(err.errors[0].path, "err.errors[0].path");
-
     if (err.errors[0].path === "email") {
       message = ["Email already registered"];
     } else if (err.errors[0].path === "identity_number") {

@@ -14,7 +14,7 @@
   "version": "1.0.0",
   "main": "App.js",
   "scripts": {
-    "dev": "NODE_ENV=localhost nodemon App.js -L",
+    "dev": "NODE_ENV=localhost nodemon app.js -L",
     "test": "npx jest --runInBand --forceExit --setTimeout=20000  --verbose --coverage"
   },
   "keywords": [],
