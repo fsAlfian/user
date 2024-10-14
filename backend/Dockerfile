@@ -6,10 +6,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-RUN npm i --save-dev nodemon
+
+# Copy the wait-for-it script
+COPY ./scripts/wait-for-it.sh ./scripts/wait-for-it.sh
 
 COPY . .
 
-EXPOSE 5000
+# Ensure the wait-for-it script is executable
+RUN chmod +x ./scripts/wait-for-it.sh
 
-CMD ["npm", "run dev"]
+CMD ["./scripts/wait-for-it.sh", "db:3307", "--", "npm", "run", "dev"]

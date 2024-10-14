@@ -11,9 +11,10 @@ services:
       - "8000:8000"
     environment:
       NODE_ENV: development
+
     command: npm run dev # Use nodemon for live reloading
-    depends_on:
-      - db
+    networks:
+      - app-network # Custom network
 
   frontend:
     build:
@@ -32,19 +33,28 @@ services:
     command: npm run dev # React dev server for live reloading
     depends_on:
       - backend
+    networks:
+      - app-network # Custom network
 
-  db:
-    image: mysql:8
-    environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: rootpassword
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
-    ports:
-      - "3307:3307"
-    volumes:
-      - db-data:/var/lib/mysql
+#   db:
+#     image: mysql:latest
+#     environment:
+#       MYSQL_USER: root
+#       MYSQL_PASSWORD: root
+#       # MYSQL_ROOT_PASSWORD: root
+#       # MYSQL_DATABASE: user_test
+#     ports:
+#       - "3307:3307" # Host port : Container port
+#     expose:
+#       - 3307
+#     volumes:
+#       - db-data:/var/lib/mysql
+#     networks:
+#       - app-network # Custom network
 
-volumes:
-  db-data:
+# volumes:
+#   db-data:
+
+networks:
+  app-network: # Custom network definition
+    driver: bridge
